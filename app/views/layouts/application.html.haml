@@ -7,5 +7,9 @@
     = javascript_include_tag "application"
   %body
     %h3 Songs
-    %button Subscribe
+    - if session[:user_id]
+      = link_to 'Subscribe', pricing_path
+      = link_to 'Log Out', destroy_sessions_path
+    - else
+      = link_to 'Sign In', new_sessions_path
     = yield
