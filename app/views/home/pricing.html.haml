@@ -1,2 +1,17 @@
 %h1 Pricing
-- form_tag 
+= form_tag subscribe_path, method: 'POST', id: 'new_subscription' do |f|
+  %h2 Login
+  = radio_button_tag 'plan', 'basic_plan_id'
+  = radio_button_tag 'plan', 'premium_plan_id'
+  = hidden_field_tag 'stripe_card_token'
+  %h3#stripe_error
+  %label.col-sm-3.col-xs-3.control-label Credit Card
+  %input.form-control{:type => "text", id: 'credit_card_number'}
+  = label_tag :card_month, "Card Expiration"
+  = select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+  = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+  %label.col-sm-3.col-xs-3.control-label Security Code
+  %input.form-control{:type => "text", id: 'security_code'}/
+  %button.btn.btn-primary.pull-right{:type => "submit"} Register
+%script{:src => "https://js.stripe.com/v2/", :type => "text/javascript"}
+%script Stripe.setPublishableKey("#{Rails.configuration.stripe[:publishable_key]}");

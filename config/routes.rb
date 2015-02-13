@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
   get '/pricing', to: 'home#pricing'
-  post '/subscribe', to: 'home#subscribe'
+  post '/subscribe', to: 'payment#subscribe'
 
-  resource :sessions, only: [:new] do
+  resource :sessions, only: [:new, :create] do
     member do
       get :destroy, as: 'destroy'
     end

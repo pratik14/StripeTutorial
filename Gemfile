@@ -46,3 +46,5 @@ end
 gem 'bcrypt'
 gem 'haml'
 
+# payment
+gem 'stripe'
